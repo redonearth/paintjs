@@ -1,17 +1,17 @@
-const canvas = document.getElementById("jsCanvas");
-const ctx = canvas.getContext("2d");
-const colors = document.getElementsByClassName("jsColor");
-const range = document.getElementById("jsRange");
-const mode = document.getElementById("jsMode");
-const saveBtn = document.getElementById("jsSave");
+const canvas = document.getElementById('jsCanvas');
+const ctx = canvas.getContext('2d');
+const colors = document.getElementsByClassName('jsColor');
+const range = document.getElementById('jsRange');
+const mode = document.getElementById('jsMode');
+const saveBtn = document.getElementById('jsSave');
 
 const CANVAS_SIZE = 500;
-const INITIAL_COLOR = "2c2c2c";
+const INITIAL_COLOR = '#2c2c2c';
 
 canvas.width = CANVAS_SIZE;
 canvas.height = CANVAS_SIZE;
 
-ctx.fillStyle = "white";
+ctx.fillStyle = 'white';
 ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
 ctx.strokeStyle = INITIAL_COLOR;
 ctx.fillStyle = INITIAL_COLOR;
@@ -31,6 +31,7 @@ function startPainting() {
 function onMouseMove(event) {
   const x = event.offsetX;
   const y = event.offsetY;
+
   if (!painting) {
     ctx.beginPath();
     ctx.moveTo(x, y);
@@ -54,10 +55,10 @@ function handleRangeChange(event) {
 function handleModeClick() {
   if (filling === true) {
     filling = false;
-    mode.innerText = "Fill";
+    mode.innerText = '채우기';
   } else {
     filling = true;
-    mode.innerText = "Paint";
+    mode.innerText = '그리기';
   }
 }
 
@@ -73,33 +74,33 @@ function handleContextMenu(event) {
 
 function handleSaveClick() {
   const image = canvas.toDataURL();
-  const link = document.createElement("a");
+  const link = document.createElement('a');
   link.href = image;
-  link.download = "PaintJS[🌈]";
+  link.download = '[PaintJS 🌈]';
   link.click();
 }
 
 if (canvas) {
-  canvas.addEventListener("mousemove", onMouseMove);
-  canvas.addEventListener("mousedown", startPainting);
-  canvas.addEventListener("mouseup", stopPainting);
-  canvas.addEventListener("mouseleave", stopPainting);
-  canvas.addEventListener("click", handleCanvasClick);
-  canvas.addEventListener("contextmenu", handleContextMenu);
+  canvas.addEventListener('mousemove', onMouseMove);
+  canvas.addEventListener('mousedown', startPainting);
+  canvas.addEventListener('mouseup', stopPainting);
+  canvas.addEventListener('mouseleave', stopPainting);
+  canvas.addEventListener('click', handleCanvasClick);
+  canvas.addEventListener('contextmenu', handleContextMenu);
 }
 
 Array.from(colors).forEach((color) =>
-  color.addEventListener("click", handleColorClick)
+  color.addEventListener('click', handleColorClick)
 );
 
 if (range) {
-  range.addEventListener("input", handleRangeChange);
+  range.addEventListener('input', handleRangeChange);
 }
 
 if (mode) {
-  mode.addEventListener("click", handleModeClick);
+  mode.addEventListener('click', handleModeClick);
 }
 
 if (saveBtn) {
-  saveBtn.addEventListener("click", handleSaveClick);
+  saveBtn.addEventListener('click', handleSaveClick);
 }
